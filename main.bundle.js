@@ -27,7 +27,7 @@ module.exports = ".selected {\r\n  background-color: #CFD8DC !important;\r\n  co
 /***/ "./src/app/app.main.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <h1>Simple text converter</h1>\n    </div>    \n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n        <textarea [(ngModel)]=\"inputText\"></textarea>\n    </div>\n    <div class=\"col-sm-4\">\n        <ul class=\"converters_list\">\n            <li *ngFor=\"let converter of converters\"\n              [class.selected]=\"converter === current_converter\"\n              (click)=\"onConverterSelect(converter)\">\n              <span>{{converter.name}}</span>\n            </li>\n          </ul>\n    </div>\n    <div class=\"col-sm-4\">\n        <textarea>{{getConvertedText()}}</textarea>\n    </div>      \n  </div>"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12\">\r\n      <h1>Simple text converter</h1>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-4\">\r\n      <textarea textarea-autoheight [(ngModel)]=\"inputText\"></textarea>\r\n    </div>\r\n    <div class=\"col-sm-4\">\r\n      <ul class=\"converters_list\">\r\n        <li *ngFor=\"let converter of converters\" [class.selected]=\"converter === current_converter\" (click)=\"onConverterSelect(converter)\">\r\n          <span>{{converter.name}}</span>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"col-sm-4\">\r\n      <textarea textarea-autoheight [textare_autoheight_change_track]=\"inputText\" readonly>{{getConvertedText()}}</textarea>\r\n    </div>\r\n  </div>"
 
 /***/ }),
 
@@ -44,13 +44,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 
 var AppMain = /** @class */ (function () {
     function AppMain() {
         this.inputText = '';
-        this.current_converter = new __WEBPACK_IMPORTED_MODULE_1__converter__["b" /* NoConverter */];
         this.converters = [new __WEBPACK_IMPORTED_MODULE_1__converter__["b" /* NoConverter */], new __WEBPACK_IMPORTED_MODULE_1__converter__["c" /* ToBase64Converter */], new __WEBPACK_IMPORTED_MODULE_1__converter__["a" /* FromBase64Converter */]];
+        this.current_converter = this.converters[1];
     }
     AppMain.prototype.getConvertedText = function () {
         return this.current_converter.convert(this.inputText);
@@ -64,7 +67,8 @@ var AppMain = /** @class */ (function () {
             selector: 'text-converter-app',
             template: __webpack_require__("./src/app/app.main.html"),
             styles: [__webpack_require__("./src/app/app.main.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [])
     ], AppMain);
     return AppMain;
 }());
@@ -83,6 +87,7 @@ var AppMain = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng_bootstrap_ng_bootstrap__ = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_main__ = __webpack_require__("./src/app/app.main.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__textarea_autoheight_directive__ = __webpack_require__("./src/app/textarea-autoheight.directive.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -94,13 +99,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["G" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["H" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_4__app_main__["a" /* AppMain */]
+                __WEBPACK_IMPORTED_MODULE_4__app_main__["a" /* AppMain */],
+                __WEBPACK_IMPORTED_MODULE_5__textarea_autoheight_directive__["a" /* TextareaAutoheightDirective */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -159,6 +166,62 @@ var FromBase64Converter = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/textarea-autoheight.directive.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TextareaAutoheightDirective; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var TextareaAutoheightDirective = /** @class */ (function () {
+    function TextareaAutoheightDirective(element) {
+        this.element = element;
+        this.el = element.nativeElement;
+        this.updateHeight();
+    }
+    TextareaAutoheightDirective.prototype.ngOnChanges = function (changes) {
+        this.updateHeight();
+    };
+    TextareaAutoheightDirective.prototype.updateHeight = function () {
+        this.el.style.overflow = 'hidden';
+        this.el.style.height = 'auto';
+        this.el.style.height = this.element.nativeElement.scrollHeight + 'px';
+    };
+    TextareaAutoheightDirective.prototype.onInput = function (textArea) {
+        this.updateHeight();
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Input */])(),
+        __metadata("design:type", Object)
+    ], TextareaAutoheightDirective.prototype, "textare_autoheight_change_track", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* HostListener */])('input', ['$event.target']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [HTMLTextAreaElement]),
+        __metadata("design:returntype", void 0)
+    ], TextareaAutoheightDirective.prototype, "onInput", null);
+    TextareaAutoheightDirective = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */])({
+            selector: 'textarea[textarea-autoheight]'
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]])
+    ], TextareaAutoheightDirective);
+    return TextareaAutoheightDirective;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/environments/environment.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -189,7 +252,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* enableProdMode */])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
